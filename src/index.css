@@ -8,9 +8,23 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: #fff;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
 }
+
+@layer base {
+	.font-outline-2 {
+	  -webkit-text-stroke: 2px black;
+	}
+	.font-outline-4 {
+	  -webkit-text-stroke: 4px black;
+	}
+  }
+
+  .navbar{
+	background-color: #F5F5F5;
+  }

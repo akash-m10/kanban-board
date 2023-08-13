@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "./Card";
+import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
 
 const Page = () => {
 	const [mapping, setMapping] = useState({});
@@ -13,12 +14,13 @@ const Page = () => {
 	const [currentCategory, setCurrentCategory] = useState("");
 	const apiUrl = "https://apimocha.com/quicksell/data";
 	const priorityMapping = {
-		0: "No Priority",
-		1: "Low",
-		2: "Medium",
-		3: "High",
 		4: "Urgent",
+		3: "High",
+		2: "Medium",
+		1: "Low",
+		0: "No Priority",
 	};
+	
 
 	useEffect(() => {
 		async function fetchData() {
@@ -74,7 +76,7 @@ const Page = () => {
 		const selectedValue = event.target.value;
 		if (selectedValue === "Priority") {
 			setCurrentCategory("priority");
-			setCategories([...priorities].sort());
+			setCategories([...priorities].sort().reverse());
 		} else if (selectedValue === "Status") {
 			setCurrentCategory("status");
 			setCategories([...statuses]);
@@ -89,10 +91,13 @@ const Page = () => {
 
 	return (
 		<div>
+		{/* <select>
+		<label>Display</label> */}
+		<div className="navbar p-5">
 			<select
 				value={sortBy}
 				onChange={handleSortChange}
-				className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
+				className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-black-500 text-base pl-3 pr-10 bg-gray-300 hover:bg-gray-400"
 			>
 				<option value="title">Sort By</option>
 				<option value="title">Title</option>
@@ -100,13 +105,15 @@ const Page = () => {
 			</select>
 			<select
 				onChange={handleGroupByChange}
-				className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
-			>
+				className="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-black-500 text-base pl-3 pr-10 bg-gray-300 hover:bg-gray-400"
+			>	
 				<option>Group By</option>
 				<option>Priority</option>
 				<option>Status</option>
 				<option>User</option>
 			</select>
+		</div>
+		{/* </select> */}
 			<div
 				style={{
 					display: "flex",
@@ -116,11 +123,18 @@ const Page = () => {
 				{categories.map((category) => (
 					<div key={category} className="m-5">
 						{currentCategory === "userId" ? (
-							<h1>{mapping[category]}</h1>
+							<div>
+							<img
+							className="w-5 h-5 rounded-full float-left"
+							src={faker.image.avatar()}
+							alt="user"
+							/>
+							<h1 className="font-bold text-base text-opacity-5 pl-6 pb-4">{mapping[category]}</h1>
+							</div>
 						) : currentCategory === "priority" ? (
-							<h1>{priorityMapping[category]}</h1>
+							<h1 className="font-bold text-opacity-5">{priorityMapping[category]}</h1>
 						) : (
-							<h1>{category}</h1>
+							<h1 className="font-bold text-opacity-5">{category}</h1>
 						)}
 						{data
 							.filter((ticket) => {
