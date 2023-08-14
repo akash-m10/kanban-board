@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "./Card";
-import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
+import { faker } from "@faker-js/faker";
 
 const Page = () => {
 	const [mapping, setMapping] = useState({});

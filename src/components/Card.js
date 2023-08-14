@@ -1,5 +1,5 @@
 import React from "react";
-import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
+import { faker } from "@faker-js/faker";
 const Card = (props) => {
 	return (
 		<div>
